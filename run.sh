@@ -23,4 +23,7 @@ echo "smtp_sasl_security_options = noanonymous" >> /etc/postfix/main.cf
 echo "[$SMTP_SERVER]:587 $SMTP_USERNAME:$SMTP_PASSWORD" >> /etc/postfix/sasl_passwd
 postmap /etc/postfix/sasl_passwd
 
-supervisord
+/etc/init.d/rsyslog start
+/etc/init.d/postfix start
+
+tail -f /var/log/maillog
