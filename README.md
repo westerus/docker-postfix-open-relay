@@ -1,4 +1,4 @@
-# docker-postfix
+# docker-postfix-open-relay
 Simple Postfix SMTP TLS open relay [docker](http://www.docker.com) image with no authentication enabled. Please use carefully, open relays can be used for spam.
 
 Based on [juanluisbaptiste/docker-postfix](https://github.com/juanluisbaptiste/docker-postfix).
