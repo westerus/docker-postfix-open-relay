@@ -18,28 +18,34 @@ You can also find a prebuilt docker image from [Docker Hub](https://registry.hub
 
 The following env variables need to be passed to the container:
 
-* `SMTP_SERVER` Server address of the SMTP server to use.
-* `SMTP_USERNAME` Username to authenticate with.
-* `SMTP_PASSWORD` Password of the SMTP user.
-* `SERVER_HOSTNAME` Server hostname for the Postfix container. Emails will appear to come from the hostname's domain.
+*   `SMTP_SERVER` Server address of the SMTP server to use.
+*   `SMTP_PORT` Server port of the SMTP server to use. Default port is 587.
+*   `SMTP_USERNAME` Username to authenticate with.
+*   `SMTP_PASSWORD` Password of the SMTP user.
+*   `SMTP_SENDER` Mail address sender of the SMTP user.
+*   `SERVER_HOSTNAME` Server hostname for the Postfix container. Emails will appear to come from the hostname's domain.
 
 To use this container from anywhere, the 25 port needs to be exposed to the docker host server:
 
     docker run -d --name postfix -p "25:25"  \
            -e SMTP_SERVER=smtp.bar.com \
+           -e SMTP_PORT=587 \
            -e SMTP_USERNAME=foo@bar.com \
            -e SMTP_PASSWORD=XXXXXXXX \
+           -e SMTP_SENDER=foo@bar.com \
            -e SERVER_HOSTNAME=helpdesk.mycompany.com \
-           wehriam/postfix-open-relay
+           westerus/postfix-openrelay
 
 If you are going to use this container from other docker containers then it's better to just publish the port:
 
     docker run -d --name postfix -P \
            -e SMTP_SERVER=smtp.bar.com \
+           -e SMTP_PORT=587 \
            -e SMTP_USERNAME=foo@bar.com \
            -e SMTP_PASSWORD=XXXXXXXX \
+           -e SMTP_SENDER=foo@bar.com \
            -e SERVER_HOSTNAME=helpdesk.mycompany.com \
-            wehriam/postfix-open-relay
+            westerus/postfix-openrelay
 
 
 #### A note about using gmail as a relay
